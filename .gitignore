@@ -6,6 +6,7 @@ __pycache__/
 # Imagens geradas
 *.h5
 /*.jpg
+/*.png
 settings.json
 
 # C extensions
