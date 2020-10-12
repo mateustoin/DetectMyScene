@@ -2,10 +2,14 @@ from imageai.Detection import ObjectDetection
 import os
 import cv2
 import math
+from gtts import gTTS
+from elementos import lista_original, lista_traduzida
+
+from random import randint
 
 class DetectScene(object):
-    def __init__(self):
-        self.imagePath = 'example3.jpg'
+    def __init__(self, imagePath):
+        self.imagePath = imagePath
         self.originalImage = cv2.imread(self.imagePath)
         self.detections = {}
 
@@ -18,11 +22,11 @@ class DetectScene(object):
 
     def detectaObjetos(self):
         detections = self.detector.detectObjectsFromImage(input_image=os.path.join(self.execution_path , self.imagePath), 
-                                                    output_image_path=os.path.join(self.execution_path , "example3new2.jpg"), 
-                                                    minimum_percentage_probability=50)
+                                                    output_image_path=os.path.join(self.execution_path , 'imageai_' + self.imagePath), 
+                                                    minimum_percentage_probability=45)
 
         self.detections = detections
-        print(detections)
+
         return detections
 
     def criaMatrizDistancia(self):
@@ -93,24 +97,67 @@ class DetectScene(object):
     def marcaLinha(self):
         for i in range(len(self.detections)):
             ix, iy = self.calculaCoordenadasCentro(self.detections[i])
-            
-            for j in range(len(self.detections)):
+            cor1 = randint(0, 255)
+            cor2 = randint(0, 255)
+            cor3 = randint(0, 255)
+
+            cv2.putText(self.originalImage, str(i), (ix, iy - 5), cv2.FONT_HERSHEY_COMPLEX, 0.8, (255, 255, 255))
+
+            for j in range(i, len(self.detections)):
                 if (i == j):
                     continue
                 jx, jy = self.calculaCoordenadasCentro(self.detections[j])
-                cv2.line(self.originalImage, (ix, iy), (jx, jy), (255, 255, 255), 1)
+                cv2.line(self.originalImage, (ix, iy), (jx, jy), (cor1, cor2, cor3), 1)
 
         cv2.imwrite('linha_' + self.imagePath, self.originalImage)
+
+    def criaDescricaoSimples(self):
+        lista_nomes_original = []
+        for item in self.detections:
+            index_nome = lista_original.index(item['name'])
+            nome = lista_traduzida[index_nome] 
+            lista_nomes_original.append(nome)
+        
+        lista_nomes_sem_repeticao = self.remove_repetidos(lista_nomes_original)
+
+        itens_descricao = []
+        texto_descricao = 'A cena da imagem que você enviou contém: \n'
+        for item in lista_nomes_sem_repeticao:
+            quantidade_item = lista_nomes_original.count(item)
+            itens_descricao.append((item, quantidade_item))
+            if (quantidade_item != 1): 
+                texto_descricao += f'{quantidade_item} {item}s \n'
+            else:
+                texto_descricao += f'{quantidade_item} {item} \n'
+
+        print(texto_descricao)
+
+        return texto_descricao
+
+    def criaAudio(self, texto):
+        print('Criando áudio...')
+        tts = gTTS(texto, lang='pt-br')
+        tts.save('descricao.mp3')
+        print('Audio criado!')
+
+    def remove_repetidos(self, lista):
+        l = []
+        for i in lista:
+            if i not in l:
+                l.append(i)
+        l.sort()
+        return l
 
     def distanciaEuclidiana(self, x1, y1, x2, y2):
         dif1 = math.pow(x1 - x2, 2)
         dif2 = math.pow(y1 - y2, 2)
         distancia = math.sqrt(dif1 + dif2)
 
-        return distancia
+        return int(distancia)
 
-detect = DetectScene()
+detect = DetectScene('example3.jpg')
 detect.detectaObjetos()
 detect.marcaPonto()
 detect.criaMatrizDistancia()
 detect.marcaLinha()
+detect.criaAudio(detect.criaDescricaoSimples())

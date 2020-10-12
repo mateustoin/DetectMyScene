@@ -12,7 +12,7 @@ detector.setModelPath( os.path.join(execution_path , "resnet50_coco_best_v2.0.1.
 detector.loadModel()
 detections = detector.detectObjectsFromImage(input_image=os.path.join(execution_path , image), 
                                              output_image_path=os.path.join(execution_path , "example3new2.jpg"), 
-                                             minimum_percentage_probability=50,
+                                             minimum_percentage_probability=40,
                                              display_percentage_probability=False,
                                              display_object_name=False)
 

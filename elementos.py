@@ -1,0 +1,2 @@
+lista_original = ['person',  'bicycle',  'car', 'dog', 'motorcycle', 'truck', 'handbag', 'traffic light']
+lista_traduzida = ['pessoa', 'bicicleta', 'carro', 'cachorro', 'motocicleta', 'caminhão', 'bolsa de mão', 'semáforo']
