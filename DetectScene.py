@@ -12,6 +12,7 @@ class DetectScene(object):
         self.imagePath = imagePath
         self.originalImage = cv2.imread(self.imagePath)
         self.detections = {}
+        self.objectCenter = []
 
         self.execution_path = os.getcwd()
 
@@ -34,8 +35,20 @@ class DetectScene(object):
 
         for i in range(len(self.detections)):
             linhaDistancia = []
+            # Calcula coordenadas de centro do objeto
             ix, iy = self.calculaCoordenadasCentro(self.detections[i])
-            
+
+            nome_original = self.detections[i]['name']
+            nome_traduzido = lista_traduzida[lista_original.index(nome_original)]
+            # Cria lista de descrição de cada objeto
+            info_object = {
+                'id': i,
+                'name': nome_traduzido,
+                'centerCoord': (ix, iy)
+            }
+            self.objectCenter.append(info_object)
+
+            # Calcula matriz de distância entre todos os objetos da cena
             for j in range(len(self.detections)):
                 jx, jy = self.calculaCoordenadasCentro(self.detections[j])
                 distancia = self.distanciaEuclidiana(ix, iy, jx, jy)
@@ -45,6 +58,8 @@ class DetectScene(object):
         for index in range(len(self.detections)):
             for element in range(len(self.detections)):
                 print(f"Distancia do objeto identificado {index} -> {element} : {matriz_distancia[index][element]}")
+
+        print(self.objectCenter[0]['name'], self.objectCenter[0]['id'])
 
     def calculaBoxPoints(self, objeto):
         x1 = objeto['box_points'][0]
@@ -134,10 +149,10 @@ class DetectScene(object):
 
         return texto_descricao
 
-    def criaAudio(self, texto):
+    def criaAudio(self, texto, nome):
         print('Criando áudio...')
         tts = gTTS(texto, lang='pt-br')
-        tts.save('descricao.mp3')
+        tts.save(nome + '_descricao.mp3')
         print('Audio criado!')
 
     def remove_repetidos(self, lista):
@@ -147,6 +162,63 @@ class DetectScene(object):
                 l.append(i)
         l.sort()
         return l
+
+    def criaDescricaoLocalizada(self):
+        lista_nomes_original = []
+        for item in self.detections:
+            index_nome = lista_original.index(item['name'])
+            nome = lista_traduzida[index_nome] 
+            lista_nomes_original.append(nome)
+        
+        lista_nomes_sem_repeticao = self.remove_repetidos(lista_nomes_original)
+
+        itens_descricao = []
+        texto_descricao = 'A cena da imagem contém: \n'
+        for item in lista_nomes_sem_repeticao:
+            quantidade_item = lista_nomes_original.count(item)
+            itens_descricao.append((item, quantidade_item))
+            if (quantidade_item != 1): 
+                texto_descricao += f'{quantidade_item} {item}s \n'
+            else:
+                texto_descricao += f'{quantidade_item} {item} \n'
+
+        height, width, channels = self.originalImage.shape
+        fatia_imagem = width/3
+
+        obj_esquerda = []
+        obj_direita = []
+        obj_meio = []
+
+        itens_descricao = []
+        # Separa cada objeto em sua localização na imagem baseado no eixo X do ponto central
+        # Realiza contagem total de objetos
+        for item in self.objectCenter:
+            
+            x_axis = item['centerCoord'][0]
+            # Se está do lado esquerdo da imagem
+            if (x_axis < fatia_imagem):
+                obj_esquerda.append(item)
+            # Se está no meio
+            elif (x_axis > fatia_imagem and x_axis < fatia_imagem*2):
+                obj_meio.append(item)
+            # Se está do lado direito da imagem
+            else:
+                obj_direita.append(item)
+
+        # Começa descrição total
+        texto_descricao += '\n Do lado esquerdo da imagem temos: \n'
+        for item in obj_esquerda:
+            texto_descricao += item['name'] + ', '
+
+        texto_descricao += '\n No centro da imagem temos: \n'
+        for item in obj_meio:
+            texto_descricao += item['name'] + ', '
+
+        texto_descricao += '\n Do lado direito da imagem temos: \n'
+        for item in obj_direita:
+            texto_descricao += item['name'] + ', '
+
+        return texto_descricao
 
     def distanciaEuclidiana(self, x1, y1, x2, y2):
         dif1 = math.pow(x1 - x2, 2)
@@ -160,4 +232,5 @@ detect.detectaObjetos()
 detect.marcaPonto()
 detect.criaMatrizDistancia()
 detect.marcaLinha()
-detect.criaAudio(detect.criaDescricaoSimples())
+detect.criaAudio(detect.criaDescricaoSimples(), 'simples')
+detect.criaAudio(detect.criaDescricaoLocalizada(), 'localizada')
