@@ -19,6 +19,7 @@ class DetectScene(object):
         #self.originalImage = cv2.imread(self.imagePath)
         self.imagePath = 'imageUpload.jpg'
         self.img_np = cv2.imdecode(np.frombuffer(imagePath, np.uint8), -1) #np.fromstring(imagePath, np.uint8)
+        self.img_np = cv2.cvtColor(self.img_np, cv2.COLOR_BGR2RGB)
         self.originalImage = self.img_np
         self.detections = {}
         self.objectCenter = []
@@ -115,7 +116,7 @@ class DetectScene(object):
             print(40 * "-")
             '''
 
-        cv2.imwrite('ponto_' + self.imagePath, self.originalImage)
+        cv2.imwrite('ponto_' + self.imagePath, cv2.cvtColor(self.originalImage, cv2.COLOR_RGB2BGR))
 
     def marcaLinha(self):
         """
@@ -134,7 +135,7 @@ class DetectScene(object):
                 jx, jy = DetectMatematica.calculaCoordenadasCentro(self.detections[j])
                 cv2.line(self.originalImage, (ix, iy), (jx, jy), (cor1, cor2, cor3), 1)
 
-        cv2.imwrite('linha_' + self.imagePath, self.originalImage)
+        cv2.imwrite('linha_' + self.imagePath, cv2.cvtColor(self.originalImage, cv2.COLOR_RGB2BGR))
 
     def criaDescricaoSimples(self):
         """
