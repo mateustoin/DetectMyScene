@@ -1,4 +1,7 @@
-# Título do Projeto
+<figure class="image" align='center'>
+    <img src="img/DetectMySceneHeader.png?raw=true">
+    <figcaption></figcaption>
+</figure>
 
 ## Índice
 + [Sobre](#sobre)
