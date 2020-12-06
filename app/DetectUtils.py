@@ -22,7 +22,7 @@ class DetectUtils(object):
             transformar o texto em áudio, utilizando ferramentas do google text to speech.
         """
         print('Criando áudio...')
-        tts = gTTS(texto, lang='pt-br')
+        tts = gTTS(text=texto, lang='pt-br')
         tts.save(nome + '_descricao.mp3')
         print('Audio criado!')
 

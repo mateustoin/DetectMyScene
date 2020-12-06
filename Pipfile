@@ -12,6 +12,7 @@ gtts = "*"
 fastapi = "*"
 uvicorn = "*"
 python-multipart = "*"
+gtts-token = "*"
 
 [dev-packages]
 pylint = "*"
