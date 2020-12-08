@@ -24,18 +24,18 @@ Para a maioria dos testes durante o desenvolvimento do projeto, a imagem a segui
 </figure>
 </div>
 
+<div align='center'>
+    <img src="img/example.jpg?raw=true"/>
+</a>
+<p>Figura 1. Imagem de teste</p>
+</div>
+
 <h3><b>Passo 1: Identificação dos objetos</b></h3>
 
 Esse passo é realizado pela própria biblioteca utilizada (ImageAI), onde são identificados todos os objetos reconhecidos na imagem, informando o nome, probabilidade de ser aquele objeto específico e suas delimitações na imagem. Essas informações base são essenciais para os próximos passos, pois são com elas que todas as informações são cruzadas e geram novos resultados.
 
 <figure class="image" align='center'>
-    <img src="img/example_square.jpg?raw=true">
-    <figcaption>Figura 2. Identificação da biblioteca</figcaption>
-</figure>
-
-<h2><b>Passo 2: </b></h2>
-
-Após o passo 1 o objetivo foi calcular o "ponto central" dos objetos, a partir da delimitação, conhecida como *box_points*. Determinar esse ponto foi necessário para que cada objeto tivesse sua posição em um ponto (x, y) na imagem, para que o próximo passo pudesse ser feito.
+    <img src="img/> delimitação, conhecida como *box_points*. Determinar esse ponto foi necessário para que cada objeto tivesse sua posição em um ponto (x, y) na imagem, para que o próximo passo pudesse ser feito.
 
 <figure class="image" align='center'>
     <img src="img/example_point.jpg?raw=true">
