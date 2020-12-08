@@ -5,10 +5,11 @@
 
 # Índice
 + [Sobre](#sobre)
+    - [Passo 1: Identificação dos objetos]()
 + [Primeiros Passos](#steps)
 + [Uso](#uso)
 
-<h1 id="sobre">1. Sobre</h1>
+<h1 id="sobre">Sobre</h1>
 
 O *Detect My Scene* foi um projeto realizado durante a live coding do <a href="">meu canal na Twitch</a>. O objetivo principal era realizar algum projeto assistivo, para suprir alguma necessidade. Através de discussões foi resolvido que poderíamos ajudar deficientes visuais, criando um programa que fosse capaz de descrever uma foto (que poderia ser extendido para vídeos também) através de texto ou áudio. Com isso o deficiente visual poderia tirar fotos em um ambiente ou até tirar fotos de alguma notícia ou artigo para rodar no software e ter uma breve descrição do que existe ali.
 
@@ -16,12 +17,14 @@ Para a criação dessa aplicação foram utilizados alguns conceitos de Intelig�
 
 Para a maioria dos testes durante o desenvolvimento do projeto, a imagem a seguir foi utilizada, além de algumas outras para validações. Os objetos identificados nas imagens testadas no desenvolvimento mostram apenas objetos que o algoritmo tem 45% ou mais de certeza de ser de fato aquilo que foi identificado.
 
+<div align='center'>
 <figure class="image" align='center'>
     <img src="img/example.jpg?raw=true">
     <figcaption>Figura 1. Imagem de teste</figcaption>
 </figure>
+</div>
 
-<h2><b>Passo 1: Identificação dos objetos</b></h2>
+<h3><b>Passo 1: Identificação dos objetos</b></h3>
 
 Esse passo é realizado pela própria biblioteca utilizada (ImageAI), onde são identificados todos os objetos reconhecidos na imagem, informando o nome, probabilidade de ser aquele objeto específico e suas delimitações na imagem. Essas informações base são essenciais para os próximos passos, pois são com elas que todas as informações são cruzadas e geram novos resultados.
 
