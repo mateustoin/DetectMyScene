@@ -5,8 +5,15 @@
 
 # Índice
 + [Sobre](#sobre)
-    - [Passo 1: Identificação dos objetos]()
+    - [Passo 1: Identificação dos objetos](#passo1)
+    - [Passo 2: Determinação do ponto (x, y)](#passo2)
+    - [Passo 3: Matriz de distância entre objetos](#passo3)
+    - [Passo 4: Criação de descrição simples em áudio](#passo4)
+    - [Passo 5: Criação de descrição com localização em áudio](#passo5)
+    - [Novas funcionalidades](#passo6)
 + [Primeiros Passos](#steps)
+    - [Pré-requisitos](#pre_req)
+    - [Instalação](#instalacao)
 + [Uso](#uso)
 
 <h1 id="sobre">Sobre</h1>
@@ -18,38 +25,36 @@ Para a criação dessa aplicação foram utilizados alguns conceitos de Intelig�
 Para a maioria dos testes durante o desenvolvimento do projeto, a imagem a seguir foi utilizada, além de algumas outras para validações. Os objetos identificados nas imagens testadas no desenvolvimento mostram apenas objetos que o algoritmo tem 45% ou mais de certeza de ser de fato aquilo que foi identificado.
 
 <div align='center'>
-<figure class="image" align='center'>
-    <img src="img/example.jpg?raw=true">
-    <figcaption>Figura 1. Imagem de teste</figcaption>
-</figure>
-</div>
-
-<div align='center'>
     <img src="img/example.jpg?raw=true"/>
-</a>
-<p>Figura 1. Imagem de teste</p>
+    <p>Figura 1. Imagem de teste</p>
 </div>
 
-<h3><b>Passo 1: Identificação dos objetos</b></h3>
+<h3 id='passo1'><b>Passo 1: Identificação dos objetos</b></h3>
 
 Esse passo é realizado pela própria biblioteca utilizada (ImageAI), onde são identificados todos os objetos reconhecidos na imagem, informando o nome, probabilidade de ser aquele objeto específico e suas delimitações na imagem. Essas informações base são essenciais para os próximos passos, pois são com elas que todas as informações são cruzadas e geram novos resultados.
 
-<figure class="image" align='center'>
-    <img src="img/> delimitação, conhecida como *box_points*. Determinar esse ponto foi necessário para que cada objeto tivesse sua posição em um ponto (x, y) na imagem, para que o próximo passo pudesse ser feito.
+<div align='center'>
+    <img src="img/example_square.jpg?raw=true"/>
+    <p>Figura 2. Identificação da biblioteca</p>
+</div>
 
-<figure class="image" align='center'>
-    <img src="img/example_point.jpg?raw=true">
-    <figcaption>Figura 3. Determinação do ponto (x, y) de cada objeto</figcaption>
-</figure>
+<h3 id='passo2'><b>Passo 2: Determinação do ponto (x, y)</b></h3>
 
-<h2><b>Passo 3: </b></h2>
+Após o passo 1 o objetivo foi calcular o "ponto central" dos objetos, a partir da delimitação, conhecida como *box_points*. Determinar esse ponto foi necessário para que cada objeto tivesse sua posição em um ponto (x, y) na imagem, para que o próximo passo pudesse ser feito.
+
+<div align='center'>
+    <img src="img/example_point.jpg?raw=true"/>
+    <p>Figura 3. Determinação do ponto (x, y) de cada objeto</p>
+</div>
+
+<h3 id='passo3'><b>Passo 3: Matriz de distância entre objetos</b></h3>
 
 Com os objetos tendo suas posições devidamente identificadas, foi possível implementar e calcular a *distância euclidiana* entre cada um dos objetos identificados. Além de saber exatamente em que área da imagem cada objeto está, agora sabemos a distância entre cada um. Isso possibilita a implementação de outros algoritmos como KNN (Vizinho mais próximo), entre outros, a fim de criar uma relação entre os objetos e criar descrições para o/a deficiente visual cada vez mais detalhadas.
 
-<figure class="image" align='center'>
-    <img src="img/example_line.jpg?raw=true">
-    <figcaption>Figura 3. Cálculo de distância entre objetos</figcaption>
-</figure>
+<div align='center'>
+    <img src="img/example_line.jpg?raw=true"/>
+    <p>Figura 4. Cálculo de distância entre objetos</p>
+</div>
 
 Além disso foi criada uma Matriz de Distância, com identificador entre cada objeto (como pode ser visto na imagem acima) e linhas indicando onde inicia e para. A tabela com os valores para a imagem de exemplo podem ser vistos abaixo (distância em pixels).
 
@@ -161,7 +166,7 @@ Além disso foi criada uma Matriz de Distância, com identificador entre cada ob
 
 <p align='center'>Tabela 1. Matriz de distância entre os objetos da imagem</p>
 
-<h2><b>Passo 4: </b></h2>
+<h3 id='passo4'><b>Passo 4: Criação de descrição simples em áudio</b></h3>
 
 De acordo com o que foi feito no *passo 1* já é possível criar uma descrição textual do que pode ser encontrado na imagem e uma sonora também. Todos os tipos de objetos identificáveis pelo modelo foram traduzidos para que um dos principais diferenciais do projeto pudesse ser feito: descrição textual e sonora em português. A seguir é possível escutar o áudio gerado automaticamente depois da identificação dos objetos:
 
@@ -174,7 +179,7 @@ De acordo com o que foi feito no *passo 1* já é possível criar uma descriçã
 </div>
 
 
-<h2><b>Passo 5: </b></h2>
+<h3 id='passo5'><b>Passo 5: Criação de descrição com localização em áudio</b></h3>
 
 A partir do passo 2 é possível melhorar a descrição textual e sonora. Por isso foram criados dois tipos de descrição, uma simples (descrição anterior) e outra mais detalhada a respeito da licalização dos objetos. A descrição um pouco mais detalhada pode ser vista a seguir:
 
@@ -186,7 +191,7 @@ A partir do passo 2 é possível melhorar a descrição textual e sonora. Por is
 <p>Audio 2. Descrição com localização na cena</p>
 </div>
 
-<h2><b>Próximos passos</b></h2>
+<h3 id='passo6'><b>Novas funcionalidades</b></h3>
 
 A partir do passo 3, com a criação da matriz de distância seria possível, através da identificação do objeto e a distância entre eles, estimar a distância entre cada um em métricas reais (metro) e a distância do objeto até o observador. Com isso seria possível criar uma descrição complexa e detalhada para o deficiente visual, entretanto não seria viável implementar isso durante as lives, visto que iria demandar muito tempo e ainda há muito o que aprender por aí em outros projetos!
 
@@ -194,12 +199,12 @@ A partir do passo 3, com a criação da matriz de distância seria possível, at
 
 Siga estas instruções para rodar o projeto na sua máquina. 
 
-## Pré-requisitos
+<h2 id='pre_req'>Pré-requisitos</h2>
 
 > - Python 3.7.x
 > - Máquina com GPU
 
-## Instalação
+<h2 id='instalacao'>Instalação</h2>
 
 Com o python `3.7.x` instalado, basta instalar com o gerenciador de pacotes do python o pipenv:
 
@@ -225,14 +230,14 @@ Depois que estiver rodando dentro do ambiente virtual, a execução do código �
 
 Um servidor se iniciará em `127.0.0.1:500`. 
 
-<figure class="image" align='center'>
-    <img src="img/api_web.png?raw=true">
-    <figcaption>Figura 4. Entrada de imagens na API</figcaption>
-</figure>
+<div align='center'>
+    <img src="img/api_web.png?raw=true"/>
+    <p>Figura 5. Entrada de imagens na API</p>
+</div>
 
 Escolha uma imagem e clique em *Enviar*. Após o processamento será retornado as descrições textuais como corpo da resposta e os áudios serão gerados na mesma pasta do projeto.
 
-<figure class="image" align='center'>
-    <img src="img/processamento_api.png?raw=true">
-    <figcaption>Figura 5. Resultado do processamento</figcaption>
-</figure>
+<div align='center'>
+    <img src="img/processamento_api.png?raw=true"/>
+    <p>Figura 6. Resultado do processamento</p>
+</div>
