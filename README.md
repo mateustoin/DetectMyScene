@@ -163,12 +163,12 @@ Além disso foi criada uma Matriz de Distância, com identificador entre cada ob
 
 De acordo com o que foi feito no *passo 1* já é possível criar uma descrição textual do que pode ser encontrado na imagem e uma sonora também. Todos os tipos de objetos identificáveis pelo modelo foram traduzidos para que um dos principais diferenciais do projeto pudesse ser feito: descrição textual e sonora em português. A seguir é possível escutar o áudio gerado automaticamente depois da identificação dos objetos:
 
-<div>
+<div class="iframe_container">
 <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/942458215&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true" allowfullscreen></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/mateus-antonio-11" title="Mateus Antonio" target="_blank" style="color: #cccccc; text-decoration: none;">Mateus Antonio</a> · <a href="https://soundcloud.com/mateus-antonio-11/localizada-descricao" title="Localizada Descricao" target="_blank" style="color: #cccccc; text-decoration: none;">Localizada Descricao</a></div>
 </div>
 
-<div>
-<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/942458215&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true" allowfullscreen></iframe>
+<div class="iframe_container">
+<iframe width="100%" height="166" frameborder="0" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/942458215&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true" allowfullscreen></iframe>
 </div>
 
 <div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/mateus-antonio-11" title="Mateus Antonio" target="_blank" style="color: #cccccc; text-decoration: none;">Mateus Antonio</a> · <a href="https://soundcloud.com/mateus-antonio-11/localizada-descricao" title="Localizada Descricao" target="_blank" style="color: #cccccc; text-decoration: none;">Localizada Descricao</a></div>
