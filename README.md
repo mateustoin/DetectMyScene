@@ -3,13 +3,12 @@
     <figcaption></figcaption>
 </figure>
 
-## Índice
+# Índice
 + [Sobre](#sobre)
-+ [Primeiros Passos](#primeiros_passos)
++ [Primeiros Passos](#steps)
 + [Uso](#uso)
-+ [Contribuiçōes](../CONTRIBUTING.md)
 
-<h2 id="sobre">Sobre</h2>
+<h1 id="sobre">1. Sobre</h1>
 
 O *Detect My Scene* foi um projeto realizado durante a live coding do <a href="">meu canal na Twitch</a>. O objetivo principal era realizar algum projeto assistivo, para suprir alguma necessidade. Através de discussões foi resolvido que poderíamos ajudar deficientes visuais, criando um programa que fosse capaz de descrever uma foto (que poderia ser extendido para vídeos também) através de texto ou áudio. Com isso o deficiente visual poderia tirar fotos em um ambiente ou até tirar fotos de alguma notícia ou artigo para rodar no software e ter uma breve descrição do que existe ali.
 
@@ -22,7 +21,7 @@ Para a maioria dos testes durante o desenvolvimento do projeto, a imagem a segui
     <figcaption>Figura 1. Imagem de teste</figcaption>
 </figure>
 
-<h3><b>Passo 1: Identificação dos objetos</b></h3>
+<h2><b>Passo 1: Identificação dos objetos</b></h2>
 
 Esse passo é realizado pela própria biblioteca utilizada (ImageAI), onde são identificados todos os objetos reconhecidos na imagem, informando o nome, probabilidade de ser aquele objeto específico e suas delimitações na imagem. Essas informações base são essenciais para os próximos passos, pois são com elas que todas as informações são cruzadas e geram novos resultados.
 
@@ -31,7 +30,7 @@ Esse passo é realizado pela própria biblioteca utilizada (ImageAI), onde são 
     <figcaption>Figura 2. Identificação da biblioteca</figcaption>
 </figure>
 
-<h3><b>Passo 2: </b></h3>
+<h2><b>Passo 2: </b></h2>
 
 Após o passo 1 o objetivo foi calcular o "ponto central" dos objetos, a partir da delimitação, conhecida como *box_points*. Determinar esse ponto foi necessário para que cada objeto tivesse sua posição em um ponto (x, y) na imagem, para que o próximo passo pudesse ser feito.
 
@@ -40,7 +39,7 @@ Após o passo 1 o objetivo foi calcular o "ponto central" dos objetos, a partir 
     <figcaption>Figura 3. Determinação do ponto (x, y) de cada objeto</figcaption>
 </figure>
 
-<h3><b>Passo 3: </b></h3>
+<h2><b>Passo 3: </b></h2>
 
 Com os objetos tendo suas posições devidamente identificadas, foi possível implementar e calcular a *distância euclidiana* entre cada um dos objetos identificados. Além de saber exatamente em que área da imagem cada objeto está, agora sabemos a distância entre cada um. Isso possibilita a implementação de outros algoritmos como KNN (Vizinho mais próximo), entre outros, a fim de criar uma relação entre os objetos e criar descrições para o/a deficiente visual cada vez mais detalhadas.
 
@@ -159,52 +158,78 @@ Além disso foi criada uma Matriz de Distância, com identificador entre cada ob
 
 <p align='center'>Tabela 1. Matriz de distância entre os objetos da imagem</p>
 
-<h3><b>Passo 4: </b></h3>
+<h2><b>Passo 4: </b></h2>
 
 De acordo com o que foi feito no *passo 1* já é possível criar uma descrição textual do que pode ser encontrado na imagem e uma sonora também. Todos os tipos de objetos identificáveis pelo modelo foram traduzidos para que um dos principais diferenciais do projeto pudesse ser feito: descrição textual e sonora em português. A seguir é possível escutar o áudio gerado automaticamente depois da identificação dos objetos:
 
-<div class="iframe_container">
-<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/942458215&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true" allowfullscreen></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/mateus-antonio-11" title="Mateus Antonio" target="_blank" style="color: #cccccc; text-decoration: none;">Mateus Antonio</a> · <a href="https://soundcloud.com/mateus-antonio-11/localizada-descricao" title="Localizada Descricao" target="_blank" style="color: #cccccc; text-decoration: none;">Localizada Descricao</a></div>
+<div align='center'>
+<a href="https://soundcloud.com/mateus-antonio-11/simples-descricao?in=mateus-antonio-11/sets/audios-projeto-detectmyscene">
+         <img src="img/simples_descricao.png"
+         width=550 height=> 
+</a>
+<p align='center'>Audio 1. Descrição simples da cena</p>
 </div>
 
-<div class="iframe_container">
-<iframe width="100%" height="166" frameborder="0" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/942458215&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true" allowfullscreen></iframe>
+
+<h2><b>Passo 5: </b></h2>
+
+A partir do passo 2 é possível melhorar a descrição textual e sonora. Por isso foram criados dois tipos de descrição, uma simples (descrição anterior) e outra mais detalhada a respeito da licalização dos objetos. A descrição um pouco mais detalhada pode ser vista a seguir:
+
+<div align='center'>
+<a href="https://soundcloud.com/mateus-antonio-11/localizada-descricao?in=mateus-antonio-11/sets/audios-projeto-detectmyscene">
+         <img alt="Qries" src="img/audio_localiza.png"
+         width=550 height=>
+</a>
+<p>Audio 2. Descrição com localização na cena</p>
 </div>
 
-<div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/mateus-antonio-11" title="Mateus Antonio" target="_blank" style="color: #cccccc; text-decoration: none;">Mateus Antonio</a> · <a href="https://soundcloud.com/mateus-antonio-11/localizada-descricao" title="Localizada Descricao" target="_blank" style="color: #cccccc; text-decoration: none;">Localizada Descricao</a></div>
+<h2><b>Próximos passos</b></h2>
 
-<h3><b>Passo 5: </b></h3>
+A partir do passo 3, com a criação da matriz de distância seria possível, através da identificação do objeto e a distância entre eles, estimar a distância entre cada um em métricas reais (metro) e a distância do objeto até o observador. Com isso seria possível criar uma descrição complexa e detalhada para o deficiente visual, entretanto não seria viável implementar isso durante as lives, visto que iria demandar muito tempo e ainda há muito o que aprender por aí em outros projetos!
 
-link para os áudios:
-https://soundcloud.com/mateus-antonio-11/sets/audios-projeto-detectmyscene
+<h1 id="steps">2. Primeiros Passos</h1> 
 
-## Começando <a name = "comecando"></a>
-Estas intruçōes te darão uma cópia funcional do projeto na sua máquina local para desenvolvimento e testes. Veja [deployment](#deployment) para uma descrição de como realizar o deployment deste projeto online.
+Siga estas instruções para rodar o projeto na sua máquina. 
 
-### Pré-requisitos
+## Pré-requisitos
 
-Descreva o que é necessário para instalar este software e como instalá-lo.
+> - Python 3.7.x
+> - Máquina com GPU
 
-```
-Dê exemplos
-```
+## Instalação
 
-### Instalação
+Com o python `3.7.x` instalado, basta instalar com o gerenciador de pacotes do python o pipenv:
 
-Passo-a-passo com exemplos que reproduzam um estágio de desenvolvimento funcional.
+`pip3 install pipenv`
 
-Descreva o passo a ser tomado
+Clone o repositório para obter o código necessário:
 
-```
-Dê um exemplo
-```
+`git clone https://github.com/mateustoin/DetectMyScene`
 
-Repita
+O arquivo de modelos utilizado para a identificações do projeto é o `resnet50_coco_best_v2.0.1.h5`, pode ser encontrado o link de download na <a href="https://github.com/OlafenwaMoses/ImageAI">documentação do ImageAI</a>. Cole ele na pasta raiz do projeto. Depois todas as dependências necessárias para a execução do projeto podem ser instaladas automaticamente com o comando:
 
-```
-Até terminar
-```
+`pipenv install`
 
-## Uso <a name="uso"></a>
-Descreva como utilizar seu app ou sistema.
+<h1 id='uso'>3. Uso</h1>
 
+Para utilizar o projeto, basta entrar no ambiente criado pelo pipenv.
+
+`pipenv shell`
+
+Depois que estiver rodando dentro do ambiente virtual, a execução do código é realizada através de uma simples API para facilitar a entrada de dados. Pode ser iniciada com:
+
+`uvicorn main:app`
+
+Um servidor se iniciará em `127.0.0.1:500`. 
+
+<figure class="image" align='center'>
+    <img src="img/api_web.png?raw=true">
+    <figcaption>Figura 4. Entrada de imagens na API</figcaption>
+</figure>
+
+Escolha uma imagem e clique em *Enviar*. Após o processamento será retornado as descrições textuais como corpo da resposta e os áudios serão gerados na mesma pasta do projeto.
+
+<figure class="image" align='center'>
+    <img src="img/processamento_api.png?raw=true">
+    <figcaption>Figura 5. Resultado do processamento</figcaption>
+</figure>
