@@ -18,7 +18,7 @@
 
 <h1 id="sobre">Sobre</h1>
 
-O *Detect My Scene* foi um projeto realizado durante a live coding do <a href="twitch.tv/bittoin">meu canal na Twitch</a>. O objetivo principal era realizar algum projeto assistivo, para suprir alguma necessidade. Através de discussões foi resolvido que poderíamos ajudar deficientes visuais, criando um programa que fosse capaz de descrever uma foto (que poderia ser extendido para vídeos também) através de texto ou áudio. Com isso o deficiente visual poderia tirar fotos em um ambiente ou até tirar fotos de alguma notícia ou artigo para rodar no software e ter uma breve descrição do que existe ali.
+O *Detect My Scene* foi um projeto realizado durante a live coding do <a href="https://www.twitch.tv/bittoin">meu canal na Twitch</a>. O objetivo principal era realizar algum projeto assistivo, para suprir alguma necessidade. Através de discussões foi resolvido que poderíamos ajudar deficientes visuais, criando um programa que fosse capaz de descrever uma foto (que poderia ser extendido para vídeos também) através de texto ou áudio. Com isso o deficiente visual poderia tirar fotos em um ambiente ou até tirar fotos de alguma notícia ou artigo para rodar no software e ter uma breve descrição do que existe ali.
 
 Para a criação dessa aplicação foram utilizados alguns conceitos de Inteligência Artificial e Processamento Digital de Imagens, com a biblioteca <a href="https://github.com/OlafenwaMoses/ImageAI">ImageAI</a> e alguns cálculos e aplicações implementadas do zero. O projeto é realizado em alguns passos.
 
