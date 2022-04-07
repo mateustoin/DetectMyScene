@@ -201,8 +201,8 @@ Siga estas instruções para rodar o projeto na sua máquina.
 
 <h2 id='pre_req'>Pré-requisitos</h2>
 
-> - Python 3.7.x
-> - Máquina com GPU
+> - Python 3.7 ou superior
+> - Máquina com GPU (Pode ser feito sem GPU, será apenas mais lento)
 
 <h2 id='instalacao'>Instalação</h2>
 
